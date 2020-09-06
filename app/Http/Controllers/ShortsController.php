@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ShortsRequest;
-use App\Shorts;
+use App\{Shorts, ShortLog};
+
 
 class ShortsController extends Controller
 {
+    private ShortLog $ShortLog;
+    public function __construct(){
+        $this->ShortLog = new ShortLog();
+    }
     public function add_new_short(ShortsRequest $request){
         $shorts = new Shorts();
         $short_id = $shorts->addNewShort($request->input('url'));
@@ -19,6 +24,7 @@ class ShortsController extends Controller
         if (!$short){
             abort(404);
         }
+        $this->ShortLog->logging($short->id);
         $short->increment('linked');
         return redirect( $short->url);
     }
