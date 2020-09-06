@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
@@ -26,6 +24,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/add/short', 'ShortsController@add_new_short')->name('add-short');
+Route::get('/log/{short_id}', 'ShortLogController@show');
 
 /* Admin panel */
 Route::group([

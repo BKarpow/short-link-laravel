@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Shorts;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $Shorts = new Shorts();
+        $my_shorts = $Shorts->where('user_id', auth()->user()->id)
+            ->paginate(15);
+        return view('welcome', ['my_shorts' => $my_shorts]);
     }
 }
