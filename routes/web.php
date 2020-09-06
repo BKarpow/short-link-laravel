@@ -25,6 +25,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('/add/short', 'ShortsController@add_new_short')->name('add-short');
+
 /* Admin panel */
 Route::group([
     'prefix' => 'admin',
@@ -35,3 +37,5 @@ Route::group([
         return 'asd';
     });
 });
+
+Route::get('/{short_id}', 'ShortsController@redirect_to_short');
