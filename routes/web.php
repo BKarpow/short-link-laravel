@@ -35,6 +35,8 @@ Route::group([
     Route::get('/', 'AdminHomeController@index')->name('home-admin-panel');
     Route::get('/token/create/new', 'AdminApiTokenController@create_token')->name('create-token');
     Route::get('/token/list', 'AdminApiTokenController@show')->name('show-tokens');
+    Route::get('/token/delete/{token}', 'AdminApiTokenController@delete_token');
+    Route::get('/token/toggle/{token}', 'AdminApiTokenController@toggle_token');
 });
 
 Route::get('/{short_id}', 'ShortsController@redirect_to_short');

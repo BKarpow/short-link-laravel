@@ -13,12 +13,22 @@ class AdminApiTokenController extends Controller
     function __construct()
     {
         $this->ApiToken = new ApiToken();
-//        $this->user_id =
+
     }
 
     public function create_token(){
         $token = $this->ApiToken->createToken();
         return view('admin.pages.tokens.add', ['token' => $token]);
+    }
+
+    public function delete_token($token){
+        $this->ApiToken->deleteToken((string)$token);
+        return redirect('/admin')->with('status', 'Запис ' . $token . ' видалено!');
+    }
+
+    public function toggle_token($token){
+        $this->ApiToken->toggleToken($token);
+        return redirect('/admin')->with('status', 'Перемикач задіяно.');
     }
 
     public function show(){

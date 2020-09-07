@@ -22,6 +22,7 @@
                                 <td>{{ $item->token }}</td>
                                 <td>{{ $item->request_count }}</td>
                                 <td>
+                                    <a href="/admin/token/toggle/{{ $item->token }}">Увікнути/Вимкнути</a> |
                                     <a href="/admin/token/delete/{{ $item->token }}">Видалити</a>
                                 </td>
                             </tr>

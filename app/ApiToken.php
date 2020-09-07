@@ -46,4 +46,34 @@ class ApiToken extends Model
     {
         $this->where('token', $token)->increment('request_count');
     }
+
+    /**
+     * Видаляє токен запис
+     * @param $token string
+     * @return void
+     */
+    public function deleteToken(string $token):void {
+        $this->where('token', $token)->delete();
+    }
+
+    /**
+     * Вмикає/вимикає токен
+     * @param $token string
+     *
+     */
+    public function toggleToken(string $token):void{
+        $toggle = $this->where('token', $token)->first();
+        $toggle->enable = !$toggle->enable;
+        $toggle->save();
+    }
+
+    /**
+     * Перевіряє увімкнений токен
+     * @param $token string
+     * @return bool
+     */
+    public function isEnableToken(string $token):bool {
+        $enable = $this->where('token', $token)->first();
+        return (bool)$enable->enable;
+    }
 }

@@ -15,6 +15,10 @@
     @include('admin.includes.menu')
 </div>
 <!-- /#menu.container -->
+<div id="alertBlock">
+    @include('admin.includes.alert')
+</div>
+<!-- /#alertBlock -->
     <main id="content" class="mt-3">
         @yield('content')
     </main>
