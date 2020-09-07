@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home-main');
+Route::get('/about', 'HomeController@about')->name('about');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home-test');
 
 Auth::routes();
 
@@ -31,10 +32,9 @@ Route::group([
     'prefix' => 'admin',
     'middleware' => ['auth', 'can:admin-panel'],
 ], function(){
-    Route::get('/', function(){
-        var_dump( auth()->user()->role);
-        return 'asd';
-    });
+    Route::get('/', 'AdminHomeController@index')->name('home-admin-panel');
+    Route::get('/token/create/new', 'AdminApiTokenController@create_token')->name('create-token');
+    Route::get('/token/list', 'AdminApiTokenController@show')->name('show-tokens');
 });
 
 Route::get('/{short_id}', 'ShortsController@redirect_to_short');

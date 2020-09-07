@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('text-title') Відстеження переходів @endsection
+
 @section('content')
     <div class="container">
         <div class="row">

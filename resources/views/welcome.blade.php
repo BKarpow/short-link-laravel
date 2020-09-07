@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('text-title') Головна @endsection
+
 @section('content')
 
     <div class="container">

@@ -29,4 +29,8 @@ class HomeController extends Controller
             ->paginate(15);
         return view('welcome', ['my_shorts' => $my_shorts]);
     }
+
+    public function about(){
+        return view('pages.about');
+    }
 }
