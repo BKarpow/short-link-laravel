@@ -9,11 +9,11 @@ class Shorts extends Model
 {
     use ShortTrait;
 
-    public function addNewShort(string $url){
+    public function addNewShort(string $url, int $user_id = null){
         $short_id = $this->generate_short_id();
         $this->url = $url;
         $this->short_id = $short_id;
-        $this->user_id = auth()->user()->id;
+        $this->user_id = ($user_id) ? $user_id : auth()->user()->id;
         $this->linked = 0;
         $this->save();
         return $short_id;

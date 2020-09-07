@@ -14,10 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/short/add', function (Request $req){
-    var_dump($req);
-    return 'test api';
-});
+Route::post('/short/add', 'ApiController@add_new_short');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
