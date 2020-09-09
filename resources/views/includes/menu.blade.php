@@ -25,15 +25,7 @@
                 </li>
                 <!-- /.nav-item -->
 
-                @if (auth()->user()->role === 10)
-                    <li class="nav-item {{ Route::currentRouteNamed('admin') ? 'active': '' }}">
-                        <a href="{{ url('/admin') }}" class="nav-link">
-                            Адмінка
-                        </a>
-                        <!-- /.nav-link -->
-                    </li>
-                    <!-- /.nav-item -->
-                @endif
+
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -49,6 +41,15 @@
                         </li>
                     @endif
                 @else
+                    @if ((int)auth()->user()->role === 10)
+                        <li class="nav-item {{ Route::currentRouteNamed('admin') ? 'active': '' }}">
+                            <a href="{{ url('/admin') }}" class="nav-link">
+                                Адмінка
+                            </a>
+                            <!-- /.nav-link -->
+                        </li>
+                        <!-- /.nav-item -->
+                    @endif
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}

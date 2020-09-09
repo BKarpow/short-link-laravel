@@ -49720,7 +49720,8 @@ module.exports = function(module) {
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // import '@fortawesome/fontawesome-free';
+
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
@@ -49741,7 +49742,34 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    shortUrlField: '',
+    shortLinkActiveCopy: false
+  },
+  methods: {
+    copyShortUrl: function copyShortUrl() {
+      console.log('Click');
+
+      if (this.shortLinkActiveCopy) {
+        document.getElementById('url').select();
+        document.execCommand('copy');
+        this.shortLinkActiveCopy = false;
+      }
+    }
+  },
+  mounted: function mounted() {
+    console.log('Mounted');
+    var url = document.getElementById('url').dataset.url;
+    this.shortUrlField = url;
+
+    if (url.length > 3) {
+      this.shortLinkActiveCopy = true;
+    }
+  },
+  created: function created() {
+    console.log('Created');
+  }
 });
 
 /***/ }),

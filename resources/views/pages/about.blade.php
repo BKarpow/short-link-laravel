@@ -7,11 +7,22 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="jumbotron">
-                    <h1 class="display-4">Hello, world!</h1>
-                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <h1 class="display-4">Скорочення посилань</h1>
+                    <p class="lead">
+                        Цей сервіс дає змогу скорочувати посилання, та інструменти API
+                    </p>
+                    <p class="lead">
+                        Для використання API звернітся за xymerone@gmail.com
+                    </p>
+                    <p class="lead">
+                        Автор Богдан Карпов
+                    </p>
+                    <!-- /.lead -->
                     <hr class="my-4">
-                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                    <a class="btn btn-primary btn-lg" href="tg://@BogdanKarpov" role="button">
+                        <i class="fab fa-telegram-plane"></i>
+                        Мій телеграм
+                    </a>
                 </div>
             </div>
             <!-- /.col-md-10 -->

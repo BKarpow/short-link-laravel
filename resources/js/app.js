@@ -6,6 +6,8 @@
 
 require('./bootstrap');
 
+// import '@fortawesome/fontawesome-free';
+
 window.Vue = require('vue');
 
 /**
@@ -29,4 +31,31 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    data:{
+        shortUrlField: '',
+        shortLinkActiveCopy: false,
+
+    },
+    methods:{
+        copyShortUrl: function(){
+            console.log('Click')
+            if (this.shortLinkActiveCopy){
+                document.getElementById('url').select()
+                document.execCommand('copy')
+                this.shortLinkActiveCopy = false
+            }
+        }
+    },
+    mounted: function(){
+        console.log('Mounted')
+        const url = document.getElementById('url').dataset.url
+
+        this.shortUrlField = url
+        if (url.length > 3){
+            this.shortLinkActiveCopy = true
+        }
+    },
+    created(){
+        console.log('Created')
+    }
 });

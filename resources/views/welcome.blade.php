@@ -15,12 +15,14 @@
                         <div class="form-group">
                             <label for="" ></label>
                             <input
+                                data-url="{{ session('short_link') }}"
                                 type="text"
+                                v-model="shortUrlField"
+                                @click="copyShortUrl"
                                 id="url"
                                 name="url"
                                 placeholder="Вставте посилання для скорочення"
                                 class="form-control"
-                                value="{{ session('short_link') }}"
                             >
                             <!-- /.form-control -->
                         </div>
