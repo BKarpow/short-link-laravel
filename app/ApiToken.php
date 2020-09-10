@@ -22,6 +22,23 @@ class ApiToken extends Model
     }
 
     /**
+     * Перевіряє токен користувача
+     * @param $token string
+     * @return bool
+     */
+    public function isToken(string $token):bool{
+        $tok = $this->where('token', $token)
+            ->select('id')
+            ->first();
+        if (!$tok || !$tok->id) return false;
+        else{
+            if (!$this->isEnableToken($token)) return false;
+            $this->incrementRequestsCount($token);
+            return true;
+        }
+    }
+
+    /**
      * Метод повертає ід користувача по його API токен
      * @param string $api_token - токен користувача
      * @return int $user_id - Ід користувача.

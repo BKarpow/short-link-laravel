@@ -34,7 +34,7 @@ class Shorts extends Model
     }
 
     /**
-     * Перевіряє чи немає такого url для користувача
+     * Перевіряє чи немає такого скорочення для користувача
      * та повертає обєкт  якщо є.
      * @param $url string
      * @param $user_id int
@@ -72,6 +72,18 @@ class Shorts extends Model
                         DB::raw('shorts.id as id, name, url, short_id, linked, shorts.updated_at as updated_at')
                     )
                     ->paginate(25);
+    }
+
+    /**
+     * Повертає всі скорочення для користувача
+     * @param $user_id int
+     * @return mixed
+     */
+    public  function getAllShortFromUser(int $user_id = 0){
+        $user_id = !$user_id ? (int)auth()->user()->id : $user_id;
+        return DB::table('shorts')
+            ->where('user_id', $user_id)
+            ->all();
     }
 
 }

@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/short/add', 'ApiController@add_new_short');
+Route::group(['middleware' => 'api'], function(){
+    Route::post('/short/add', 'ApiController@add_new_short');
+    Route::get('/short/all', 'ApiController@show_all_shorts');
+});
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
