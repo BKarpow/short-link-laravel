@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test', function(){
+    $url = 'http://127.0.0.1/openserver/phpmyadmin/tbl_structure.php?server=1&db=service_laravel&table=shorts';
+    echo preg_replace('#^(http|https)\:\/\/[^\/]+?\/(.*?)#si','\\2', $url);
+    return '';
+});
+
 Route::get('/', 'HomeController@index')->name('home-main');
 Route::get('/about', 'HomeController@about')->name('about');
 

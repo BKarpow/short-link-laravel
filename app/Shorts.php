@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\ShortTrait;
+use Illuminate\Support\Facades\DB;
 
 class Shorts extends Model
 {
@@ -12,6 +13,10 @@ class Shorts extends Model
     public function addNewShort(string $url, int $user_id = null){
 
         $user_id = ($user_id) ? $user_id : auth()->user()->id;
+
+        if ($this->isShorted($url)){
+            return $this->getPathFromUrl($url);
+        }
 
         $uniq = $this->isUniqShortFromUser($url, $user_id);
 
@@ -54,5 +59,19 @@ class Shorts extends Model
         return (int)$res->id;
     }
 
+
+    /**
+     * Поаертає всі скорочення для всіх користувачав.
+     * Використовувати лише для адмін панлі!
+     * @return DB
+     */
+    public function getAllShortsFromAllUsers(){
+        return DB::table('shorts')
+                    ->leftJoin('users', 'shorts.user_id', '=', 'users.id')
+                    ->select(
+                        DB::raw('shorts.id as id, name, url, short_id, linked, shorts.updated_at as updated_at')
+                    )
+                    ->paginate(25);
+    }
 
 }

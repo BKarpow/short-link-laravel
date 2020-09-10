@@ -49749,8 +49749,6 @@ var app = new Vue({
   },
   methods: {
     copyShortUrl: function copyShortUrl() {
-      console.log('Click');
-
       if (this.shortLinkActiveCopy) {
         document.getElementById('url').select();
         document.execCommand('copy');

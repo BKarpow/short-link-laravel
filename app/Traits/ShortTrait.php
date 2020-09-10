@@ -23,4 +23,23 @@ trait ShortTrait{
         }
         return $short_id;
     }
+
+    /**
+     * Повертає шлях з повної адреси utl (path)
+     * @param $url string
+     * @return string
+     */
+    public function getPathFromUrl(string $url):string{
+        return preg_replace('#^(http|https)\:\/\/[^\/]+?\/(.*?)#si','\\2', $url);
+    }
+
+    /**
+     * Перевіряє чи посилання вже скорочене
+     * @param $url string
+     * @return bool
+     */
+    public function isShorted(string $url):bool {
+         $domain = str_replace(['https://', 'http://', '/'], '', url('/'));
+         return (bool)strpos($url, $domain);
+    }
 }
