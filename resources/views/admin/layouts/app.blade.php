@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('/public/css/app.css') }}">
 
+
     <title>@yield('text-title') | Admin Panel</title>
 </head>
 <body>

@@ -9,16 +9,28 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <ul class="list-group">
-                    @foreach($data as $item)
-                        <li class="list-group-item">
-                            <div class="d-flex justify-content-between">
-                                <span class="d-block"> {{ $item->ip }} </span>
-                                <span class="d-block"> {{ $item->user_agent }} </span>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+                <div class="table-response">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>IP</th>
+                            <th>User-Agent</th>
+                            <th>Перехід</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($data as $item)
+                            <tr>
+                                <td>{{ $item->ip }}</td>
+                                <td>{{ $item->user_agent }}</td>
+                                <td>{{ $item->created_at }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    <!-- /.table -->
+                </div>
+                <!-- /.table-response -->
                 <div class="py-3 d-flex justify-content-center align-items-center">
                     {{ $data->links() }}
                 </div>
