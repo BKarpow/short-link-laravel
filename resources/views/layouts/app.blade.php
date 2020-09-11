@@ -26,6 +26,10 @@
         @include('includes.menu')
         <!-- END Menu block -->
 
+        <!-- Error box -->
+        @include('includes.error')
+        <!-- End Error box -->
+
         <main class="py-4">
             @yield('content')
         </main>

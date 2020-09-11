@@ -31,48 +31,7 @@
                             <button class="btn btn-success">Додати</button>
                         </div>
                     </form>
-                    <div class="mt-3 px-1 py-2">
-                        <h4 class="text-center">Ваші скорочення</h4>
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <div class="d-flex justify-content-between align-items-center py-1">
-                                    <span class="d-block">
-                                        Скорочення
-                                    </span>
-                                    <span class="d-block">
-                                        Переходи
-                                    </span>
-                                    <span class="d-block">
-                                        Відстежити (Лог переходів)
-                                    </span>
-                                </div>
-                            </li>
-                            @foreach($my_shorts as $item)
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-between align-items-center py-1">
-                                    <span class="d-block">
-                                        <a href="{{ asset('/' . $item->short_id) }}">
-                                            {{  substr($item->url, 0, 20)  }}...
-                                        </a>
 
-                                    </span>
-                                        <span class="d-block">
-                                        {{ $item->linked }}
-                                    </span>
-                                        <span class="d-block">
-                                        <a href="/log/{{$item->short_id}}">
-                                            Відстежити
-                                        </a>
-                                    </span>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                        <div class="d-flex py-3 mt-1 justify-content-center align-items-center">
-                            {{$my_shorts->links()}}
-                        </div>
-                    </div>
-                    <!-- /.px-1 -->
                 @endif
             </div>
             <!-- /.col-md-6 -->
@@ -81,6 +40,50 @@
                 <p> {{ session('short_link') }} </p>
             </div>
             <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+        <div class="row mt-3">
+            <div class="mt-3 px-1 py-2">
+                <h4 class="text-center">Ваші скорочення</h4>
+                <div class="table-response">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Url скорочення</th>
+                            <th>Скорочений Url</th>
+                            <th>Переходи</th>
+                            <th>Додатково</th>
+                            <th>Останній перехід</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($my_shorts as $item)
+                            <tr>
+                                <td>{{ $item->url }}</td>
+                                <td>{{url('/') . $item->short_id}}</td>
+                                <td>{{ $item->linked  }}</td>
+                                <td>
+                                    <a
+                                        rel="nofollow"
+                                        title="Відстежити переходи"
+                                        href="/log/{{$item->short_id}}">
+                                        <i class="fas  fa-eye"></i>
+                                    </a>
+                                </td>
+                                <td> {{ $item->updated_at }} </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    <!-- /.table -->
+                </div>
+                <!-- /.table-response -->
+
+                <div class="d-flex py-3 mt-1 justify-content-center align-items-center">
+                    {{$my_shorts->links()}}
+                </div>
+            </div>
+            <!-- /.px-1 -->
         </div>
         <!-- /.row -->
     </div>
