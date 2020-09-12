@@ -51,6 +51,8 @@ Route::group([
         ->name('create-category');
     Route::post('/category/create/action', 'CategoryPostController@create_category_action')
         ->name('create-category-action');
+    Route::get('/category/list/all', 'CategoryPostController@show_category_list')
+        ->name('list-all-category');
 });
 
 Route::get('/{short_id}', 'ShortsController@redirect_to_short');

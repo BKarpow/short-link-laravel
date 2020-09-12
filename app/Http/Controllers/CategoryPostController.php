@@ -8,8 +8,13 @@ use App\CategoryPost;
 
 class CategoryPostController extends Controller
 {
-    public function create_category(){
 
+    public function show_category_list(){
+        return view('admin.pages.categoryposts.list',
+        ['data' => CategoryPost::paginate(15)]);
+    }
+
+    public function create_category(){
         return view('admin.pages.categoryposts.create',
         ['categories' => CategoryPost::select('id', 'parent_category', 'title')
             ->get()]);
@@ -25,6 +30,8 @@ class CategoryPostController extends Controller
         );
         return redirect('/admin')->with('status', 'Категорію додано');
     }
+
+
 
 
 }

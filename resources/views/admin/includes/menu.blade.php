@@ -18,8 +18,9 @@
                     Категорії
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
+                    <a class="dropdown-item" href="{{ route('list-all-category') }}">Всі</a>
                     <a class="dropdown-item" href="{{ route('create-category') }}">Створити нову</a>
-{{--                    <a class="dropdown-item" href="{{-- route('show-tokens') --}}">Мої токени</a>--}}
+
                     <div class="dropdown-divider"></div>
 {{--                    <a class="dropdown-item" href="#">Доступ до API</a>--}}
                 </div>
