@@ -46,6 +46,8 @@ Route::group([
 
     Route::post('/upload/image', 'ImageUploadController@upload_image')
         ->name('upload-image');
+    Route::post('/delete/image', 'ImageUploadController@delete_image')
+        ->name('delete-image');
 
     Route::get('/category/create', 'CategoryPostController@create_category')
         ->name('create-category');

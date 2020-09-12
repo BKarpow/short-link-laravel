@@ -1974,10 +1974,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       isLoaded: false,
+      showProgress: false,
       filePath: '/storage/app/',
       file: '',
       uploadPercentage: 0
@@ -1991,6 +2000,7 @@ __webpack_require__.r(__webpack_exports__);
     submitFile: function submitFile() {
       var _this = this;
 
+      this.showProgress = true;
       var formData = new FormData();
       formData.append('file', this.file);
       axios.post('/admin/upload/image', formData, {
@@ -2006,6 +2016,23 @@ __webpack_require__.r(__webpack_exports__);
         _this.isLoaded = true;
       })["catch"](function () {
         console.log('FAILURE!!');
+      });
+    },
+    deleteFile: function deleteFile() {
+      var _this2 = this;
+
+      axios.post('/admin/delete/image', {
+        path: this.filePath
+      }).then(function (response) {
+        if (response.data["delete"]) {
+          _this2.isLoaded = false;
+          _this2.uploadPercentage = 0;
+          _this2.file = '';
+          _this2.showProgress = false;
+          _this2.filePath = '/storage/app/';
+        }
+      })["catch"](function (err) {
+        console.log('Delete Error', err);
       });
     }
   }
@@ -37661,18 +37688,20 @@ var render = function() {
           _vm._v(" "),
           _c("br"),
           _vm._v(" "),
-          _c("div", { staticClass: "progress" }, [
-            _c("div", {
-              staticClass: "progress-bar",
-              style: { width: _vm.uploadPercentage + "%" },
-              attrs: {
-                role: "progressbar",
-                "aria-valuenow": _vm.uploadPercentage,
-                "aria-valuemin": "0",
-                "aria-valuemax": "100"
-              }
-            })
-          ])
+          _vm.showProgress
+            ? _c("div", { staticClass: "progress" }, [
+                _c("div", {
+                  staticClass: "progress-bar",
+                  style: { width: _vm.uploadPercentage + "%" },
+                  attrs: {
+                    role: "progressbar",
+                    "aria-valuenow": _vm.uploadPercentage,
+                    "aria-valuemin": "0",
+                    "aria-valuemax": "100"
+                  }
+                })
+              ])
+            : _vm._e()
         ])
       : _c("div", { staticClass: "form-group" }, [
           _c("h5", [_vm._v("Фото категорії")]),
@@ -37682,6 +37711,18 @@ var render = function() {
               staticClass: "img-fluid",
               attrs: { src: _vm.filePath, alt: "" }
             })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "my-2" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                attrs: { type: "button" },
+                on: { click: _vm.deleteFile }
+              },
+              [_vm._v("× Видалити")]
+            )
           ]),
           _vm._v(" "),
           _c("input", {
