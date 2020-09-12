@@ -12,8 +12,9 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-9">
                     <div class="alert alert-danger">
+                        <h4>Є омилки(ф)</h4>
                         <ul>
-                        @foreach($errors as $error)
+                        @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                         </ul>

@@ -43,6 +43,14 @@ Route::group([
     Route::get('/token/list', 'AdminApiTokenController@show')->name('show-tokens');
     Route::get('/token/delete/{token}', 'AdminApiTokenController@delete_token');
     Route::get('/token/toggle/{token}', 'AdminApiTokenController@toggle_token');
+
+    Route::post('/upload/image', 'ImageUploadController@upload_image')
+        ->name('upload-image');
+
+    Route::get('/category/create', 'CategoryPostController@create_category')
+        ->name('create-category');
+    Route::post('/category/create/action', 'CategoryPostController@create_category_action')
+        ->name('create-category-action');
 });
 
 Route::get('/{short_id}', 'ShortsController@redirect_to_short');

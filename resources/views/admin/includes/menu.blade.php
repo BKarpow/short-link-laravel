@@ -10,8 +10,21 @@
                 <a class="nav-link" href="{{ url('/admin/') }}">Головна <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Link</a>
+                <a class="nav-link" href="{{ url('/') }}">На сайт</a>
             </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Категорії
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
+                    <a class="dropdown-item" href="{{ route('create-category') }}">Створити нову</a>
+{{--                    <a class="dropdown-item" href="{{-- route('show-tokens') --}}">Мої токени</a>--}}
+                    <div class="dropdown-divider"></div>
+{{--                    <a class="dropdown-item" href="#">Доступ до API</a>--}}
+                </div>
+            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Токени API
