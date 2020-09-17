@@ -20,6 +20,33 @@ class CategoryPostController extends Controller
             ->get()]);
     }
 
+    public function update_category($id){
+        $id = (int)$id;
+        $update_category = CategoryPost::find($id);
+        if (!$update_category){
+            abort(404);
+        }
+        return view('admin.pages.categoryposts.create',
+            [
+                'categories' => CategoryPost::select('id', 'parent_category', 'title')->get(),
+                'data' => $update_category,
+                'id' => $id
+            ]
+        );
+    }
+
+    public function update_category_action(CategoryPostRequest $request, $id){
+        $id = (int)$id;
+        $CategoryPost = new CategoryPost();
+        $result = $CategoryPost->createNew(
+            $request->input('title'),
+            $request->input('description'),
+            $request->input('icon_path', 'none'),
+            (int)$request->input('parent', '0')
+        );
+        return 'test';
+    }
+
     public function create_category_action(CategoryPostRequest $request){
         $CategoryPost = new CategoryPost();
         $result = $CategoryPost->createNew(

@@ -33,6 +33,12 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <footer class="container mt-2">
+            @yield('footer')
+        </footer>
     </div>
+
+//Script include
+@yield('scripts')
 </body>
 </html>

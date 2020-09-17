@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ShortsRequest;
+use http\Env\Request;
 use App\{Shorts, ShortLog};
 
 
@@ -16,6 +17,12 @@ class ShortsController extends Controller
         $shorts = new Shorts();
         $short_id = $shorts->addNewShort($request->input('url'));
         return redirect('/')->with('short_link',  asset('/' . $short_id) );
+    }
+
+    public function ajax_add_new(ShortsRequest $request){
+        $shorts = new Shorts();
+        $short_id = $shorts->addNewShort($request->input('url'));
+        return response()->json(['short' => asset('/' . $short_id)]);
     }
 
     public function redirect_to_short(string $short_id){

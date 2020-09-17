@@ -31,6 +31,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/add/short', 'ShortsController@add_new_short')->name('add-short');
+Route::post('/ajax/add/new', 'ShortsController@ajax_add_new')->name('ajax-add-new');
 Route::get('/log/{short_id}', 'ShortLogController@show');
 
 /* Admin panel */
@@ -55,6 +56,10 @@ Route::group([
         ->name('create-category-action');
     Route::get('/category/list/all', 'CategoryPostController@show_category_list')
         ->name('list-all-category');
+    Route::get('/category/update/{id}', 'CategoryPostController@update_category')
+        ->name('update-category');
+    Route::post('/category/update/action/{id}', 'CategoryPostController@update_category_action')
+        ->name('update-category-action');
 });
 
 Route::get('/{short_id}', 'ShortsController@redirect_to_short');

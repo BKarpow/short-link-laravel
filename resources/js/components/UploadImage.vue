@@ -10,15 +10,21 @@
                     v-on:change="handleFileUpload()"/>
             </label>
             <br>
-            <div class="progress" v-if="showProgress">
+            <div class="progress" v-if="showProgress && !errorMessage.length">
                 <div
                     class="progress-bar"
                     role="progressbar"
                     :style="{width:  uploadPercentage+'%'}"
                     :aria-valuenow="uploadPercentage"
                     aria-valuemin="0"
-                    aria-valuemax="100"></div>
+                    aria-valuemax="100">
+                    {{ uploadPercentage + '%' }}
+                </div>
             </div>
+            <div class="alert alert-danger my-1" v-if="errorMessage.length">
+                <strong> {{ errorMessage }} </strong>
+            </div>
+            <!-- /.alert my-1 -->
         </div>
         <div class="form-group" v-else>
             <h5>Фото категорії</h5>
@@ -33,7 +39,7 @@
                 >&times; Видалити</button>
             </div>
 
-            <input type="hidden" name="icon_path" :value="filePath">
+            <input type="hidden" :name="nameFieldFile" :value="filePath">
         </div>
         <!-- /.form-group -->
     </div>
@@ -41,25 +47,38 @@
 
 <script>
     export default {
+        props: ['routeUpload', 'routeDelete', 'nameFieldFile', 'defaultSrc'],
         data(){
             return {
                 isLoaded: false,
                 showProgress: false,
-                filePath: '/storage/app/',
+                filePathRoot: '/storage/app/',
+                filePath: '',
                 file: '',
+                errorMessage: '',
                 uploadPercentage: 0,
+            }
+        },
+        mounted() {
+            if (this.$props.defaultSrc.length){
+                this.isLoaded = true
+                regReplace = new RegExp(this.filePathRoot, 'i')
+                this.filePath = this.$props.defaultSrc.replace(this.filePathRoot, '')
+                console.log('Test 21', this.filePath)
             }
         },
         methods:{
             handleFileUpload(){
                 this.file = this.$refs.image.files[0];
                 this.submitFile()
+
             },
             submitFile(){
                 this.showProgress = true
+                this.errorMessage = ''
                 let formData = new FormData();
                 formData.append('file', this.file);
-                axios.post( '/admin/upload/image',
+                axios.post( this.$props.routeUpload,
                     formData,
                     {
                         headers: {
@@ -70,16 +89,34 @@
                         }.bind(this)
                     }
                 ).then(r => {
-                    console.log('Response', r.data);
-                    this.filePath += r.data.path
-                    this.isLoaded = true
+                    const response = r.data
+                    console.clear()
+                    console.log(r)
+                    if (r.status === 200){
+                        this.filePath += response.path
+                        this.isLoaded = true
+                    }else{
+                        this.errorMessage = response.message
+                        this.isLoaded = false
+                        this.uploadPercentage = 0
+                        this.file = ''
+                        this.showProgress = false
+                        this.filePath = '/storage/app/'
+                    }
 
-                }).catch(() => {
-                        console.log('FAILURE!!');
+
+                }).catch((response) => {
+                        this.errorMessage = response.message
+                        this.isLoaded = false
+                        this.uploadPercentage = 0
+                        this.file = ''
+                        this.showProgress = false
+                        this.filePath = '/storage/app/'
                     });
             },
             deleteFile: function(){
-                axios.post('/admin/delete/image', {path: this.filePath})
+                const imgPath =
+                axios.post(this.$props.routeDelete, {path: this.filePath})
                         .then(response => {
                             if (response.data.delete){
                                 this.isLoaded = false
@@ -87,6 +124,7 @@
                                 this.file = ''
                                 this.showProgress = false
                                 this.filePath = '/storage/app/'
+                                this.errorMessage = ''
                             }
 
                         })

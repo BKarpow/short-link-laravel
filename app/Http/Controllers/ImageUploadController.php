@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Storage;
 class ImageUploadController extends Controller
 {
     function upload_image(Request $request){
+        $this->validate($request, [
+            'file' => 'image'
+        ]);
         $path = $request->file('file')
             ->store('local');
         return response()->json(['path' => $path]);

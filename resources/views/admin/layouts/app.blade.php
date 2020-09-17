@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('/public/css/app.css') }}">
 
+    @yield('styles')
 
     <title>@yield('text-title') | Admin Panel</title>
 </head>
@@ -24,7 +25,13 @@
         @yield('content')
     </main>
     <!-- /#content -->
+    <footer class="container mt-2">
+        @yield('footer')
+    </footer>
 
+
+//Script include
 <script src="{{ asset('/public/js/app.js') }}"></script>
+@yield('scripts')
 </body>
 </html>

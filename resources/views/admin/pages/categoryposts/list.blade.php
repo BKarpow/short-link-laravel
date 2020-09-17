@@ -30,7 +30,11 @@
                                 </div>
                             </td>
                             <td>{{ $item->title }}</td>
-                            <td>  </td>
+                            <td>
+                                <a href="{{route('update-category', ['id'=>$item->id])}}">
+                                    Редагувати
+                                </a>
+                            </td>
                         </tr>
                         @endforeach
                         </tbody>

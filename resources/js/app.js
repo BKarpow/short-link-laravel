@@ -23,6 +23,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('upload-component', require('./components/UploadImage.vue').default);
+Vue.component('short-field-component', require('./components/shortField.vue').default);
 
 
 /**
@@ -33,30 +34,4 @@ Vue.component('upload-component', require('./components/UploadImage.vue').defaul
 
 const app = new Vue({
     el: '#app',
-    data:{
-        shortUrlField: '',
-        shortLinkActiveCopy: false,
-
-    },
-    methods:{
-        copyShortUrl: function(){
-            if (this.shortLinkActiveCopy){
-                document.getElementById('url').select()
-                document.execCommand('copy')
-                this.shortLinkActiveCopy = false
-            }
-        }
-    },
-    mounted: function(){
-        console.log('Mounted')
-        const url = document.getElementById('url').dataset.url
-
-        this.shortUrlField = url
-        if (url.length > 3){
-            this.shortLinkActiveCopy = true
-        }
-    },
-    created(){
-        console.log('Created')
-    }
 });
