@@ -1,5 +1,5 @@
 @if (!empty(session('status')))
-<div class="container my-2">
+<div id="alertBox" class="container my-2 animate__animated">
     <div class="row justify-content-center align-items-center">
         <div class="alert alert-success">
             <strong>{{ session('status') }}</strong>
@@ -8,7 +8,7 @@
 </div>
 @else
     @if ($errors->any())
-        <div class="container my-2">
+        <div id="errorBox" class="container my-2 animate__animated">
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-9">
                     <div class="alert alert-danger">

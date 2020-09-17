@@ -60,6 +60,8 @@ Route::group([
         ->name('update-category');
     Route::post('/category/update/action/{id}', 'CategoryPostController@update_category_action')
         ->name('update-category-action');
+    Route::get('/category/delete/{id}', 'CategoryPostController@delete_category')
+        ->name('delete-category');
 });
 
 Route::get('/{short_id}', 'ShortsController@redirect_to_short');

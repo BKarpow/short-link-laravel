@@ -11,6 +11,36 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 /**
+ * Параметри
+ */
+const autoHiddenBox = true //Ховати автоматично блоки
+window.timeoutHiddenBox = 4000 //(мс) Через скільки ховати бокси з повідомленнями та помилками.
+window.cssClassAnimateHidden = 'animate__bounceOutDown' //Клас який використовутся для приховування боксів
+
+
+if (autoHiddenBox){
+    console.log('Test start')
+    /**
+     * Додає калс анімаціїї і ховає блок з повідомленнями і помилками
+     */
+    const alertBox = window.document.getElementById('alertBox');
+    const errorBox = window.document.getElementById('errorBox');
+    if (alertBox !== null){
+
+        setTimeout(()=>{
+            console.log('active')
+            window.document.getElementById('alertBox').classList.add(cssClassAnimateHidden)
+        }, timeoutHiddenBox)
+    }
+    if (errorBox !== null){
+        setTimeout(()=>{
+            errorBox.classList.add(cssClassAnimateHidden)
+        }, timeoutHiddenBox)
+    }
+}
+
+
+/**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".

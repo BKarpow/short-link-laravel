@@ -1,6 +1,10 @@
 @extends('admin.layouts.app')
 
-@section('text-title') Додати категорію @endsection
+@if (!empty($data))
+    @section('text-title') Редагувати категорію {{ $data->title }} @endsection
+@else
+    @section('text-title') Додати категорію @endsection
+@endif
 
 
 
@@ -44,7 +48,7 @@
                     </div>
                     <!-- /.form-group -->
 
-
+                    @if (empty($data))
                     <div class="form-group">
                         <label for="parent">Батківська категорія</label>
                         <select name="parent" id="parent" class="form-control">
@@ -57,6 +61,9 @@
                         <!-- /#.form-control -->
                     </div>
                     <!-- /.form-group -->
+                    @else
+                        <input type="hidden" name="parent" value="{{$data->parent_category}}">
+                    @endif
                     <div class="form-group">
                         <label for="description">Опис категорії</label>
                         <textarea

@@ -2004,7 +2004,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     if (this.$props.defaultSrc.length) {
       this.isLoaded = true;
-      regReplace = new RegExp(this.filePathRoot, 'i');
       this.filePath = this.$props.defaultSrc.replace(this.filePathRoot, '');
       console.log('Test 21', this.filePath);
     }
@@ -2030,8 +2029,6 @@ __webpack_require__.r(__webpack_exports__);
         }.bind(this)
       }).then(function (r) {
         var response = r.data;
-        console.clear();
-        console.log(r);
 
         if (r.status === 200) {
           _this.filePath += response.path;
@@ -2042,7 +2039,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.uploadPercentage = 0;
           _this.file = '';
           _this.showProgress = false;
-          _this.filePath = '/storage/app/';
+          _this.filePath = '';
         }
       })["catch"](function (response) {
         _this.errorMessage = response.message;
@@ -2050,13 +2047,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.uploadPercentage = 0;
         _this.file = '';
         _this.showProgress = false;
-        _this.filePath = '/storage/app/';
+        _this.filePath = '';
       });
     },
     deleteFile: function deleteFile() {
       var _this2 = this;
 
-      var imgPath = axios.post(this.$props.routeDelete, {
+      axios.post(this.$props.routeDelete, {
         path: this.filePath
       }).then(function (response) {
         if (response.data["delete"]) {
@@ -2064,7 +2061,7 @@ __webpack_require__.r(__webpack_exports__);
           _this2.uploadPercentage = 0;
           _this2.file = '';
           _this2.showProgress = false;
-          _this2.filePath = '/storage/app/';
+          _this2.filePath = '';
           _this2.errorMessage = '';
         }
       })["catch"](function (err) {
@@ -37868,7 +37865,7 @@ var render = function() {
           _c("div", { staticClass: "col-lg-3" }, [
             _c("img", {
               staticClass: "img-fluid",
-              attrs: { src: _vm.filePath, alt: "" }
+              attrs: { src: _vm.filePathRoot + _vm.filePath, alt: "" }
             })
           ]),
           _vm._v(" "),
@@ -37886,7 +37883,7 @@ var render = function() {
           _vm._v(" "),
           _c("input", {
             attrs: { type: "hidden", name: _vm.nameFieldFile },
-            domProps: { value: _vm.filePath }
+            domProps: { value: _vm.filePathRoot + _vm.filePath }
           })
         ])
   ])
@@ -50141,6 +50138,38 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // import
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
+ * Параметри
+ */
+
+var autoHiddenBox = true; //Ховати автоматично блоки
+
+window.timeoutHiddenBox = 4000; //(мс) Через скільки ховати бокси з повідомленнями та помилками.
+
+window.cssClassAnimateHidden = 'animate__bounceOutDown'; //Клас який використовутся для приховування боксів
+
+if (autoHiddenBox) {
+  console.log('Test start');
+  /**
+   * Додає калс анімаціїї і ховає блок з повідомленнями і помилками
+   */
+
+  var alertBox = window.document.getElementById('alertBox');
+  var errorBox = window.document.getElementById('errorBox');
+
+  if (alertBox !== null) {
+    setTimeout(function () {
+      console.log('active');
+      window.document.getElementById('alertBox').classList.add(cssClassAnimateHidden);
+    }, timeoutHiddenBox);
+  }
+
+  if (errorBox !== null) {
+    setTimeout(function () {
+      errorBox.classList.add(cssClassAnimateHidden);
+    }, timeoutHiddenBox);
+  }
+}
+/**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
@@ -50149,6 +50178,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  */
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('upload-component', __webpack_require__(/*! ./components/UploadImage.vue */ "./resources/js/components/UploadImage.vue")["default"]);

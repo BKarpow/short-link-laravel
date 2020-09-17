@@ -41,12 +41,22 @@ class CategoryPost extends Model
         return (bool) $this->where('id', $id)
             ->update(
                 [
-                    'title' => $this,
+                    'title' => $title,
                     'description' => $description,
                     'icon_path' => $icon_path,
                     'parent_category' => $parent_id
                 ]
             );
+    }
+
+
+    /**
+     * Видаляє категорію
+     * @param int $category_id
+     * @return bool
+     */
+    public function deleteCategory(int $category_id):bool {
+        return (bool)$this->where('id', $category_id)->delete();
     }
 
 }

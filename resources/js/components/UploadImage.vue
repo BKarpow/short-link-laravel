@@ -29,7 +29,7 @@
         <div class="form-group" v-else>
             <h5>Фото категорії</h5>
             <div class="col-lg-3">
-                <img :src="filePath" class="img-fluid" alt="">
+                <img :src="filePathRoot + filePath" class="img-fluid" alt="">
             </div>
             <div class="my-2">
                 <button
@@ -39,7 +39,7 @@
                 >&times; Видалити</button>
             </div>
 
-            <input type="hidden" :name="nameFieldFile" :value="filePath">
+            <input type="hidden" :name="nameFieldFile" :value="filePathRoot + filePath">
         </div>
         <!-- /.form-group -->
     </div>
@@ -62,7 +62,6 @@
         mounted() {
             if (this.$props.defaultSrc.length){
                 this.isLoaded = true
-                regReplace = new RegExp(this.filePathRoot, 'i')
                 this.filePath = this.$props.defaultSrc.replace(this.filePathRoot, '')
                 console.log('Test 21', this.filePath)
             }
@@ -90,8 +89,6 @@
                     }
                 ).then(r => {
                     const response = r.data
-                    console.clear()
-                    console.log(r)
                     if (r.status === 200){
                         this.filePath += response.path
                         this.isLoaded = true
@@ -101,7 +98,7 @@
                         this.uploadPercentage = 0
                         this.file = ''
                         this.showProgress = false
-                        this.filePath = '/storage/app/'
+                        this.filePath = ''
                     }
 
 
@@ -111,11 +108,10 @@
                         this.uploadPercentage = 0
                         this.file = ''
                         this.showProgress = false
-                        this.filePath = '/storage/app/'
+                        this.filePath = ''
                     });
             },
             deleteFile: function(){
-                const imgPath =
                 axios.post(this.$props.routeDelete, {path: this.filePath})
                         .then(response => {
                             if (response.data.delete){
@@ -123,7 +119,7 @@
                                 this.uploadPercentage = 0
                                 this.file = ''
                                 this.showProgress = false
-                                this.filePath = '/storage/app/'
+                                this.filePath = ''
                                 this.errorMessage = ''
                             }
 

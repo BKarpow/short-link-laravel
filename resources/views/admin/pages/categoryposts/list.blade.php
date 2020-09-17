@@ -32,7 +32,10 @@
                             <td>{{ $item->title }}</td>
                             <td>
                                 <a href="{{route('update-category', ['id'=>$item->id])}}">
-                                    Редагувати
+                                    <i class="fas fa-edit"></i>
+                                </a> |
+                                <a href="{{ route('delete-category', ['id' => $item->id]) }}">
+                                    <i class="fas fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
