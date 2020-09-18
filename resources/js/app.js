@@ -48,12 +48,15 @@ if (autoHiddenBox){
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
+
+
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('upload-component', require('./components/UploadImage.vue').default);
 Vue.component('short-field-component', require('./components/shortField.vue').default);
+Vue.component('image-selector-component', require('./components/ImageSelector.vue').default);
 
 
 /**

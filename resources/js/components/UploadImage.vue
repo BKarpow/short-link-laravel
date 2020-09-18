@@ -92,6 +92,7 @@
                     if (r.status === 200){
                         this.filePath += response.path
                         this.isLoaded = true
+                        this.$emit('file-load', true)
                     }else{
                         this.errorMessage = response.message
                         this.isLoaded = false

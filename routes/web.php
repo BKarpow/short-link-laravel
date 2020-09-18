@@ -34,6 +34,12 @@ Route::post('/add/short', 'ShortsController@add_new_short')->name('add-short');
 Route::post('/ajax/add/new', 'ShortsController@ajax_add_new')->name('ajax-add-new');
 Route::get('/log/{short_id}', 'ShortLogController@show');
 
+Route::get('/media/all', 'MediaController@ajax_get_all')
+    ->name('ajax-media-all');
+Route::post('/media/upload/image', 'MediaController@ajax_upload_image')
+    ->name('media-upload-image');
+
+
 /* Admin panel */
 Route::group([
     'prefix' => 'admin',
@@ -62,6 +68,19 @@ Route::group([
         ->name('update-category-action');
     Route::get('/category/delete/{id}', 'CategoryPostController@delete_category')
         ->name('delete-category');
+
+
+    Route::get('/media/add', 'MediaController@add_new')
+        ->name('media-add');
+    Route::post('/media/add/action', 'MediaController@add_new_action')
+        ->name('media-add-action');
+
+
+    Route::get('/post/add', 'PostController@create_add')
+        ->name('create-post');
+    Route::post('/post/add/action', 'PostController@create_add_action')
+        ->name('create-post-action');
+
 });
 
 Route::get('/{short_id}', 'ShortsController@redirect_to_short');

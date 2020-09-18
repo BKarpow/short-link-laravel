@@ -26,6 +26,33 @@
                 </div>
             </li>
 
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPost" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Статті
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownPost">
+                    <a class="dropdown-item" href="{{ route('create-post') }}">Створити статтю</a>
+
+                    <div class="dropdown-divider"></div>
+                    {{--                    <a class="dropdown-item" href="#">Доступ до API</a>--}}
+                </div>
+            </li>
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMedia" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Медіа
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMedia">
+                    <a class="dropdown-item" href="{{ route('media-add') }}">Додати</a>
+
+                    <div class="dropdown-divider"></div>
+
+                </div>
+            </li>
+
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Токени API
