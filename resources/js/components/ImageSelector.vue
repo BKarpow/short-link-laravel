@@ -46,7 +46,7 @@
             </div>
         </div>
         <h5 class="py-1" v-if="selectImgPath.length">
-            <img :src="selectImgPath" alt="" class="img-fluid">
+            <img :src="selectImgPath" width="400" alt="" class="img-fluid">
             Обрано
         </h5>
         <!-- /.py-1 -->

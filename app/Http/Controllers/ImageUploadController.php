@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageUploadController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function upload_image(Request $request){
         $this->validate($request, [
             'file' => 'image'
@@ -25,5 +31,13 @@ class ImageUploadController extends Controller
         }
         return response()
             ->json( ['delete' => false] );
+    }
+
+    public function upload(Request $request)
+    {
+        $this->validate($request, ['file' => 'image']);
+        $path =  'local/images/upload/users/'.auth()->user()->id.'/';
+        $file = $request->file('file')->store($path);
+        return response()->json(['path' => '/storage/app/'.$file]);
     }
 }

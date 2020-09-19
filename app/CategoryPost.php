@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\PostTrait;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryPost extends Model
 {
@@ -20,7 +21,7 @@ class CategoryPost extends Model
     public function createNew(string $title, string $description, string $icon_path, int $parent_id) {
         $alias = $this->getAliasFromString($title);
         $this->title = $title;
-        $this->parent_category = $parent_id;
+        $this->parent_category = (int)$parent_id;
         $this->alias = $alias;
         $this->icon_path = $icon_path;
         $this->description = $description;
@@ -56,6 +57,8 @@ class CategoryPost extends Model
      * @return bool
      */
     public function deleteCategory(int $category_id):bool {
+        $file = $this->where('id', $category_id)->select('icon_path')->first();
+        Storage::delete(str_replace('/storage/app/', '', $file->icon_path));
         return (bool)$this->where('id', $category_id)->delete();
     }
 

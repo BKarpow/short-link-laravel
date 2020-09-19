@@ -57,6 +57,7 @@ class CategoryPostController extends Controller
             (int)$request->input('parent', '0')
         );
         return redirect('/admin')->with('status', 'Категорію додано');
+
     }
 
 

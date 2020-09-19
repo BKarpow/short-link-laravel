@@ -12,6 +12,7 @@ class ShortLogController extends Controller
     private int $countItemsPage = 15;
 
     public function __construct(){
+        $this->middleware('auth');
         $this->ShortLog = new ShortLog();
         $this->Shorts =  new Shorts();
     }
@@ -24,6 +25,7 @@ class ShortLogController extends Controller
         return view('logList', ['data' => $this->
         ShortLog
             ->where('short_id', (int)$short_id)
+            ->orderBy('id', 'desc')
             ->paginate($this->countItemsPage)
         ]);
     }

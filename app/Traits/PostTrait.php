@@ -19,16 +19,16 @@ trait PostTrait{
 
         $str = preg_replace('#\s+#si', ' ', $str);
         $str = preg_replace('#\s#si', '_', $str);
-        $str = $this->uk_to_lat($str);
-        $str = strtolower($str);
-        $str = preg_replace('#[^a-z0-9\-\_]#si', '', $str);
-        return $str;
+
+        return $this->uk_to_lat($str);
     }
 
     public function uk_to_lat(string $str):string
     {
         $uk_to_lat_arr = $this->uk_to_lat_arr();
         $str = strtr( $str, $uk_to_lat_arr );
+        $str = preg_replace('#[^a-z0-9\_]#si', '', $str);
+        $str = strtolower( trim($str) );
         return str_replace(['Ь','ь', "'"], '', $str);
     }
 
@@ -40,11 +40,13 @@ trait PostTrait{
         return strtr( $str, array_combine($from, $to) );
     }
 
+
+
     function uk_to_lat_arr()
     {
         return [
             'А' => 'A',
-            'a' => 'а',
+            'a' => 'a',
             'Б' => 'B',
             'б' => 'b',
             'В' => 'V',

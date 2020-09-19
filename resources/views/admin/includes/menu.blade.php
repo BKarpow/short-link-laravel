@@ -60,13 +60,19 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('create-token') }}">Створити новий</a>
                     <a class="dropdown-item" href="{{ route('show-tokens') }}">Мої токени</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Доступ до API</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Сторінки
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('create-page') }}">Створити нову</a>
+                    <a class="dropdown-item" href="{{ route('list-all-page') }}">Всі сторінки</a>
+                </div>
             </li>
+
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

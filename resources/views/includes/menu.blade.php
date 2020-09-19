@@ -17,8 +17,12 @@
                     <!-- /.nav-link -->
                 </li>
                 <!-- /.nav-item -->
+                <li class="nav-item">
+                    <a href="{{route('post-all')}}" class="nav-link">Статті</a>
+                </li>
+                <!-- /.nav-item -->
                 <li class="nav-item {{ Route::currentRouteNamed('about') ? 'active': '' }}">
-                    <a href="{{ route('about') }}" class="nav-link">
+                    <a href="{{ route('page', ['alias'=>'abaut']) }}" class="nav-link">
                         Про нас
                     </a>
                     <!-- /.nav-link -->

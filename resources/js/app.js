@@ -57,6 +57,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('upload-component', require('./components/UploadImage.vue').default);
 Vue.component('short-field-component', require('./components/shortField.vue').default);
 Vue.component('image-selector-component', require('./components/ImageSelector.vue').default);
+Vue.component('field-alias-component', require('./components/fieldAlias.vue').default);
 
 
 /**

@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use Illuminate\Support\Facades\DB;
 use App\{Post, CategoryPost};
 
 class PostController extends Controller
 {
+    private Post $Posts;
+    public function __construct(){
+        $this->Posts = new Post();
+    }
+
     public function create_add(){
         $CategoryPost = new CategoryPost();
         return view('admin.pages.posts.create', ['categories' => $CategoryPost->all()]);
@@ -20,8 +26,30 @@ class PostController extends Controller
             $request->input('title'),
             $request->input('short_text'),
             $request->input('text'),
+            $request->input('main_img'),
             (int)$request->input('category_id')
         );
         return redirect()->route('create-post')->with('status', 'Стаття додана успішно');
+    }
+
+    function show_all(){
+        $posts = $this->Posts->getPublicPost()->orderBy('created_at', 'desc')->paginate(15);
+        return view('pages.post.list', ['data' => $posts]);
+    }
+
+    function show($id_alias){
+        $id = (int)$id_alias;
+        $posts = DB::table('posts')
+                    ->where([['posts.public', '=', '1'], ['posts.id', '=', $id]])
+                    ->leftJoin('category_posts', 'posts.category_id', '=', 'category_posts.id')
+                    ->leftJoin('users', 'posts.user_id', '=', 'users.id')
+                     ->select(DB::raw('posts.title as post_title, users.name as user_name'), 'posts.public', 'main_img', 'short_text', 'posts.created_at', 'previews', 'text', 'category_posts.title')
+                    ->first();
+        $post = Post::where([['public', '=', '1'],['id', '=', $id]])->first();
+        if (!$post){
+            abort(404);
+        }
+        $post->increment('previews');
+        return view('pages.post.post', ['data' => $posts]);
     }
 }

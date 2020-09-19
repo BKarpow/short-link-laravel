@@ -39,6 +39,17 @@ Route::get('/media/all', 'MediaController@ajax_get_all')
 Route::post('/media/upload/image', 'MediaController@ajax_upload_image')
     ->name('media-upload-image');
 
+/* Post system */
+Route::get('/posts/all', 'PostController@show_all')
+    ->name('post-all');
+Route::get('/post/{id_alias}', 'PostController@show')
+    ->name('post');
+
+
+/* Page */
+Route::get('/page/{alias}', 'PagesController@show')
+    ->name('page');
+/* End Page */
 
 /* Admin panel */
 Route::group([
@@ -55,6 +66,8 @@ Route::group([
         ->name('upload-image');
     Route::post('/delete/image', 'ImageUploadController@delete_image')
         ->name('delete-image');
+    Route::post('/upload/', 'ImageUploadController@upload')
+        ->name('upload');
 
     Route::get('/category/create', 'CategoryPostController@create_category')
         ->name('create-category');
@@ -81,6 +94,20 @@ Route::group([
     Route::post('/post/add/action', 'PostController@create_add_action')
         ->name('create-post-action');
 
+    /* Page admin route */
+    Route::get('/page/all', 'PagesController@show_list')
+        ->name('list-all-page');
+    Route::get('/page/create', 'PagesController@create')
+        ->name('create-page');
+    Route::post('/page/create/action', 'PagesController@create_action')
+        ->name('create-page-action');
+        //AJAX
+        Route::post('/page/ajax/is/unique', 'PagesController@ajax_is_unique')
+            ->name('page-ajax-is-unique');
+    ;
+    /* End Page admin route */
+
 });
+
 
 Route::get('/{short_id}', 'ShortsController@redirect_to_short');

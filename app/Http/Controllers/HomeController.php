@@ -26,6 +26,7 @@ class HomeController extends Controller
     {
         $Shorts = new Shorts();
         $my_shorts = $Shorts->where('user_id', auth()->user()->id)
+            ->orderBy('id', 'desc')
             ->paginate(15);
         return view('welcome', ['my_shorts' => $my_shorts]);
     }

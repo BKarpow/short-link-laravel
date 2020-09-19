@@ -10909,3 +10909,22 @@ body {
   font-family: "Montserrat Alternates", sans-serif;
 }
 
+.meta-post-box {
+  padding: 0.2rem;
+  border: 1px solid #383838;
+  border-radius: 8px;
+}
+
+.meta-post-box span {
+  padding-right: 1rem;
+  font-size: 0.6rem;
+  color: #383838;
+  transition: all 0.5s;
+}
+
+.meta-post-box span:hover {
+  font-size: 0.8rem;
+  color: #111111;
+  transition: all 0.5s;
+}
+
