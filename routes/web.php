@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function(){
-    $url = 'http://127.0.0.1/openserver/phpmyadmin/tbl_structure.php?server=1&db=service_laravel&table=shorts';
-    echo preg_replace('#^(http|https)\:\/\/[^\/]+?\/(.*?)#si','\\2', $url);
-    return '';
-});
+Route::get('/test', 'SendEmailController@send');
 
 Route::get('/', 'HomeController@index')->name('home-main');
 Route::get('/about', 'HomeController@about')->name('about');
@@ -50,6 +46,13 @@ Route::get('/post/{id_alias}', 'PostController@show')
 Route::get('/page/{alias}', 'PagesController@show')
     ->name('page');
 /* End Page */
+
+/* Feedback routes */
+Route::get('/feedback', 'FeedbackController@index')
+    ->name('feedback.index');
+Route::post('/feedback/send', 'FeedbackController@send')
+    ->name('feedback.action');
+/* End Feedback routes */
 
 /* Admin panel */
 Route::group([
@@ -88,24 +91,39 @@ Route::group([
     Route::post('/media/add/action', 'MediaController@add_new_action')
         ->name('media-add-action');
 
-
+/* Admin post route */
     Route::get('/post/add', 'PostController@create_add')
         ->name('create-post');
     Route::post('/post/add/action', 'PostController@create_add_action')
         ->name('create-post-action');
+    Route::get('/post/all', 'PostController@show_list')
+        ->name('list-all-post');
+    //Control admin buttons
+    Route::get('/post/trigger/public/{id}', 'PostController@trigger_public')
+        ->name('trigger-public-post');
+    Route::get('/post/delete/{id}', 'PostController@delete_post')
+        ->name('delete-post');
 
-    /* Page admin route */
+/* Admin post route */
+
+/* Page admin route */
+    Route::get('/page/delete/{alias}', 'PagesController@delete_page')
+        ->name('delete-page');
     Route::get('/page/all', 'PagesController@show_list')
         ->name('list-all-page');
     Route::get('/page/create', 'PagesController@create')
         ->name('create-page');
+    Route::get('/page/update/{alias}', 'PagesController@update')
+        ->name('update-page');
+    Route::post('/page/update/action', 'PagesController@update_action')
+        ->name('update-page-action');
     Route::post('/page/create/action', 'PagesController@create_action')
         ->name('create-page-action');
         //AJAX
         Route::post('/page/ajax/is/unique', 'PagesController@ajax_is_unique')
             ->name('page-ajax-is-unique');
     ;
-    /* End Page admin route */
+/* End Page admin route */
 
 });
 

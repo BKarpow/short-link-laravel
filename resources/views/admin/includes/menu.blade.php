@@ -33,6 +33,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownPost">
                     <a class="dropdown-item" href="{{ route('create-post') }}">Створити статтю</a>
+                    <a class="dropdown-item" href="{{ route('list-all-post') }}">Всі статті</a>
 
                     <div class="dropdown-divider"></div>
                     {{--                    <a class="dropdown-item" href="#">Доступ до API</a>--}}

@@ -28,6 +28,13 @@
                     <!-- /.nav-link -->
                 </li>
                 <!-- /.nav-item -->
+                <li class="nav-item {{ Route::currentRouteNamed('feedback.index') ? 'active': '' }}">
+                    <a href="{{ route('feedback.index') }}" class="nav-link">
+                        Контакти
+                    </a>
+                    <!-- /.nav-link -->
+                </li>
+                <!-- /.nav-item -->
 
 
             </ul>

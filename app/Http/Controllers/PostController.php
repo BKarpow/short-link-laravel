@@ -52,4 +52,37 @@ class PostController extends Controller
         $post->increment('previews');
         return view('pages.post.post', ['data' => $posts]);
     }
+
+    function trigger_public($id){
+        $Post = new Post();
+        $post = $Post->where('id', (int)$id)->first();
+        $post->public = !(bool)$post->public;
+        $status_trigger = $post->public ? ' увімкнено ': ' вимкнено ';
+        $id = $post->id;
+        $post->save();
+        return redirect()->route('list-all-post')->with('status', 'Статус публікації '.$id.' - '.$status_trigger);
+    }
+
+    function delete_post($id){
+        $id = intval($id);
+        Post::where('id', $id)->delete();
+        return redirect()->route('list-all-post')->with('status', 'Видалено '.$id);
+    }
+
+    function show_list(){
+        $posts = DB::table('posts')
+//                    ->where([['posts.public', '=', '1'], ['posts.id', '=', $id]])
+                    ->leftJoin('category_posts', 'posts.category_id', '=', 'category_posts.id')
+                    ->leftJoin('users', 'posts.user_id', '=', 'users.id')
+->select(
+    DB::raw('posts.title as post_title, users.name as user_name, posts.id as post_id'),
+    'posts.public',
+    'main_img',
+    'posts.created_at',
+    'previews',
+    'category_posts.title')
+                    ->orderBy('posts.created_at', 'desc')
+                    ->paginate(15);
+        return view('admin.pages.posts.list', ['data' => $posts]);
+    }
 }
