@@ -3,7 +3,7 @@
         <div class="py-1">
             <h2>Коментарі</h2>
         </div>
-        <div class="my-2">
+        <div class="my-2" v-if="auth">
             <h3>Додати коментар</h3>
             <add-comments
                 :url-add-comment="urlAdd"
@@ -11,9 +11,13 @@
                 @success-add="getAllComments"
             ></add-comments>
         </div>
+        <div v-else class="my-2">
+            <h5> Ви не авторизовані, <a href="/login" target="_blank">Авторизація</a></h5>
+        </div>
+        <!-- /.my-2 -->
         <div
             v-if="load"
-            class="load-process justify-content-center align-items-center">
+            class="load-process d-flex justify-content-center align-items-center">
             <div v-if="!error.length" class="spinner-border" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -28,20 +32,20 @@
             <!-- /.alert -->
         </div>
         <!-- /.load-process -->
-        <div v-else class="load-success">
-            <div class="comments-box p-1">
+        <div v-else class="load-success ">
+            <div class="comments-box container p-1">
                 <div v-if="!comments.length" class="no-comment">
                     <h4>Намає коментарів</h4>
                 </div>
                 <!-- /.no-comment -->
                 <div v-else >
-                    <div v-for="comment in comments"  class="comment">
-                        <div class="comment-user">
+                    <div v-for="comment in comments"  class="comment row">
+                        <div class="col-md-2 comment-user">
                             <h5>{{comment.name}}</h5>
-                            <small>Прокоментовано {{comment.created_at}}</small>
+                            <small>{{ parsingDate( comment.created_at)}}</small>
                         </div>
                         <!-- /.comment-user -->
-                        <div class="comment-body">
+                        <div class="col-md-10 comment-body">
                             {{comment.comment}}
                         </div>
                         <!-- /.comment-body -->
@@ -59,7 +63,7 @@
 </template>
 <script>
     export default {
-        props: ['urlGetComments', 'urlAdd', 'postId'],
+        props: ['urlGetComments', 'urlAdd', 'postId', 'auth'],
         data(){
             return {
                 load: false,
@@ -71,6 +75,17 @@
             this.getAllComments()
         },
         methods:{
+            parsingDate(date_string){
+                const date = new Date(date_string)
+                let str_date = ''
+                str_date += date.getDate() + '-'
+                str_date += date.getMonth() + '-'
+                str_date += date.getFullYear() + ' '
+                str_date += date.getHours() + ':'
+                str_date += date.getMinutes() + ':'
+                str_date += date.getSeconds()
+                return str_date
+            },
             getAllComments(){
                 this.load = true
                 axios.get(this.$props.urlGetComments)
@@ -94,7 +109,7 @@
     $color: #141414;
     $maxWidth: 400px;
     .comments-box{
-        background: $bg;
+        background: inherit;
         color: $color;
         border-radius: 1rem;
     }
@@ -102,41 +117,27 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 4rem;
         h4{
             text-align: center;
         }
     }
     .comment{
-        @media (max-width: $maxWidth) {
-            display: block;
-        }
         padding: 1rem;
         margin: .5rem;
-        display: flex;
         border: 1px solid #ccc;
+        border-radius: 8px;
         .comment-user{
             padding: 1rem;
             border-right: 1px solid darken($bg, 20);
-            width: percentage(2/12);
             color: lighten($color, 12);
-            @media (max-width: $maxWidth) {
-                width: 100%;
-                height: .5rem;
-            }
         }
         .comment-body{
             padding: 1rem;
-            width: percentage(10/12);
-            border-bottom: 1px solid darken($bg, 20);
             font-size: 1.2rem;
             font-weight: bold;
-            @media (max-width: $maxWidth) {
-                width: 100%;
-                height: 3rem;
-            }
         }
         .comment-footer{
-            width: percentage(2/12);
 
         }
 

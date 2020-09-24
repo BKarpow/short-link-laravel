@@ -37,16 +37,19 @@
             </div>
         </div>
         <!-- /.row -->
-        <div class="rom mt-2 justify-content-center align-items-center">
-            @if (!auth()->check())
-                <h5 align="center">Щаб лишити коментар потрібно увійти</h5>
-            @endif
-            <comments
-                url-get-comments="{{route('comments.post', ['post_id' => $data->post_id])}}"
-                url-add="{{route('comments.add')}}"
-                post-id="{{$data->post_id}}"
-            >
-            </comments>
+        <div class="row mt-2 justify-content-center align-items-center">
+          <div class="col-md-10">
+              <comments
+                  url-get-comments="{{route('comments.post', ['post_id' => $data->post_id])}}"
+                  url-add="{{route('comments.add')}}"
+                  post-id="{{$data->post_id}}"
+                  @if (auth()->check())
+                  auth="true"
+                  @endif
+              >
+              </comments>
+          </div>
+          <!-- /.col-md-8 -->
         </div>
         <!-- /.rom mt-2 -->
     </div>

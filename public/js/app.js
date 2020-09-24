@@ -2325,8 +2325,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['urlGetComments', 'urlAdd', 'postId'],
+  props: ['urlGetComments', 'urlAdd', 'postId', 'auth'],
   data: function data() {
     return {
       load: false,
@@ -2338,6 +2342,17 @@ __webpack_require__.r(__webpack_exports__);
     this.getAllComments();
   },
   methods: {
+    parsingDate: function parsingDate(date_string) {
+      var date = new Date(date_string);
+      var str_date = '';
+      str_date += date.getDate() + '-';
+      str_date += date.getMonth() + '-';
+      str_date += date.getFullYear() + ' ';
+      str_date += date.getHours() + ':';
+      str_date += date.getMinutes() + ':';
+      str_date += date.getSeconds();
+      return str_date;
+    },
     getAllComments: function getAllComments() {
       var _this = this;
 
@@ -7226,7 +7241,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".comments-box {\n  background: #cfcfcf;\n  color: #141414;\n  border-radius: 1rem;\n}\n.no-comment {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.no-comment h4 {\n  text-align: center;\n}\n.comment {\n  padding: 1rem;\n  margin: 0.5rem;\n  display: flex;\n  border: 1px solid #ccc;\n}\n@media (max-width: 400px) {\n.comment {\n    display: block;\n}\n}\n.comment .comment-user {\n  padding: 1rem;\n  border-right: 1px solid #9c9c9c;\n  width: 16.6666666667%;\n  color: #333333;\n}\n@media (max-width: 400px) {\n.comment .comment-user {\n    width: 100%;\n    height: 0.5rem;\n}\n}\n.comment .comment-body {\n  padding: 1rem;\n  width: 83.3333333333%;\n  border-bottom: 1px solid #9c9c9c;\n  font-size: 1.2rem;\n  font-weight: bold;\n}\n@media (max-width: 400px) {\n.comment .comment-body {\n    width: 100%;\n    height: 3rem;\n}\n}\n.comment .comment-footer {\n  width: 16.6666666667%;\n}", ""]);
+exports.push([module.i, ".comments-box {\n  background: inherit;\n  color: #141414;\n  border-radius: 1rem;\n}\n.no-comment {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 4rem;\n}\n.no-comment h4 {\n  text-align: center;\n}\n.comment {\n  padding: 1rem;\n  margin: 0.5rem;\n  border: 1px solid #ccc;\n  border-radius: 8px;\n}\n.comment .comment-user {\n  padding: 1rem;\n  border-right: 1px solid #9c9c9c;\n  color: #333333;\n}\n.comment .comment-body {\n  padding: 1rem;\n  font-size: 1.2rem;\n  font-weight: bold;\n}", ""]);
 
 // exports
 
@@ -39512,26 +39527,28 @@ var render = function() {
   return _c("div", { attrs: { id: "comments" } }, [
     _vm._m(0),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "my-2" },
-      [
-        _c("h3", [_vm._v("Додати коментар")]),
-        _vm._v(" "),
-        _c("add-comments", {
-          attrs: { "url-add-comment": _vm.urlAdd, "post-id": _vm.postId },
-          on: { "success-add": _vm.getAllComments }
-        })
-      ],
-      1
-    ),
+    _vm.auth
+      ? _c(
+          "div",
+          { staticClass: "my-2" },
+          [
+            _c("h3", [_vm._v("Додати коментар")]),
+            _vm._v(" "),
+            _c("add-comments", {
+              attrs: { "url-add-comment": _vm.urlAdd, "post-id": _vm.postId },
+              on: { "success-add": _vm.getAllComments }
+            })
+          ],
+          1
+        )
+      : _c("div", { staticClass: "my-2" }, [_vm._m(1)]),
     _vm._v(" "),
     _vm.load
       ? _c(
           "div",
           {
             staticClass:
-              "load-process justify-content-center align-items-center"
+              "load-process d-flex justify-content-center align-items-center"
           },
           [
             !_vm.error.length
@@ -39557,8 +39574,8 @@ var render = function() {
                 ])
           ]
         )
-      : _c("div", { staticClass: "load-success" }, [
-          _c("div", { staticClass: "comments-box p-1" }, [
+      : _c("div", { staticClass: "load-success " }, [
+          _c("div", { staticClass: "comments-box container p-1" }, [
             !_vm.comments.length
               ? _c("div", { staticClass: "no-comment" }, [
                   _c("h4", [_vm._v("Намає коментарів")])
@@ -39566,16 +39583,16 @@ var render = function() {
               : _c(
                   "div",
                   _vm._l(_vm.comments, function(comment) {
-                    return _c("div", { staticClass: "comment" }, [
-                      _c("div", { staticClass: "comment-user" }, [
+                    return _c("div", { staticClass: "comment row" }, [
+                      _c("div", { staticClass: "col-md-2 comment-user" }, [
                         _c("h5", [_vm._v(_vm._s(comment.name))]),
                         _vm._v(" "),
                         _c("small", [
-                          _vm._v("Прокоментовано " + _vm._s(comment.created_at))
+                          _vm._v(_vm._s(_vm.parsingDate(comment.created_at)))
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "comment-body" }, [
+                      _c("div", { staticClass: "col-md-10 comment-body" }, [
                         _vm._v(
                           "\n                        " +
                             _vm._s(comment.comment) +
@@ -39596,6 +39613,17 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "py-1" }, [_c("h2", [_vm._v("Коментарі")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", [
+      _vm._v(" Ви не авторизовані, "),
+      _c("a", { attrs: { href: "/login", target: "_blank" } }, [
+        _vm._v("Авторизація")
+      ])
+    ])
   }
 ]
 render._withStripped = true
