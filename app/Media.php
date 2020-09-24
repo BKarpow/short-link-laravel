@@ -13,9 +13,13 @@ class Media extends Model
      * @param string $title
      * @param string $description
      * @param string $path
+     * @param int $file_size_bytes
      * @return bool
      */
-    public function addNewMedia(string $title, string $description, string $path):bool
+    public function addNewMedia(string $title,
+                                string $description,
+                                string $path,
+                                int $file_size_bytes = 0):bool
     {
         $ext = [];
         preg_match('#\.([\w\d]+)$#si', $path, $ext);
@@ -23,7 +27,7 @@ class Media extends Model
         $this->title = $title;
         $this->user_id = auth()->user()->id;
         $this->type_mime = $mime;
-        $this->size_bytes = 0;
+        $this->size_bytes = $file_size_bytes;
         $this->path = $path;
         $this->description = $description;
         return (bool) $this->save();

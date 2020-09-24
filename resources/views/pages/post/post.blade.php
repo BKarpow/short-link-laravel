@@ -16,7 +16,15 @@
                     <span>Категорія: {{$data->title}}</span> ,
                     <span>Створено: {{$data->created_at}}</span> ,
                     <span>Переглядів: {{$data->previews}}</span>
+                    <span>
+                        <i class="fas fa-tags"></i>
+                        @foreach($tags as $tag)
+                            <a href="{{route('post.show.tag', ['tag_name'=>$tag->alias])}}">
+                                {{$tag->name}}
+                            </a>&nbsp;
 
+                        @endforeach
+                    </span>
                 </div>
                 <div class="my-1 d-flex justify-content-center">
                     <img src="{{$data->main_img}}" alt="no photo">

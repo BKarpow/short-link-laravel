@@ -75,7 +75,10 @@
                         <image-selector-component></image-selector-component>
                     </div>
                     <!-- /.form-group -->
-
+                    <field-tags-component
+                        uri-set="{{route('tags.ajax.new')}}"
+                        uri-get="{{route('tags.ajax.all')}}"
+                    ></field-tags-component>
 
                     <div class="form-group">
                         <label for="category_id">Оберіть категорію</label>

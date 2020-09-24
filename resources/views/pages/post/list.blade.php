@@ -10,15 +10,22 @@
                 <hr>
                 @foreach($data as $item)
                     <div class="card mb-3">
-                        <img src="{{$item->main_img}}" class="card-img-top img-fluid w-25" alt="no image">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a
-                                    href="{{route('post', ['id_alias' => $item->id.'-'.$item->alias.'.html'])}}">
-                                    {{$item->title}}
-                                </a>
+                        <div style="
+                            background-image: url({{$item->main_img}});
+                            background-position: center;
+                            background-repeat: repeat-x;
+                            height: 13rem;
+                            position:relative;
+                            "></div>
+                        <div class="title-post-card">
+                            <a
+                                href="{{route('post', ['id_alias' => $item->id.'-'.$item->alias.'.html'])}}">
+                                {{$item->title}}
+                            </a>
+                        </div>
+                        <!-- /.title-post-card -->
 
-                            </h5>
+                        <div class="card-body">
                             <p class="card-text">{!! $item->short_text !!}</p>
                             <p class="card-text">
                                 <small class="text-muted">Оновлено {{$item->updated_at}}</small>,

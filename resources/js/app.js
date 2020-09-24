@@ -58,6 +58,8 @@ Vue.component('upload-component', require('./components/UploadImage.vue').defaul
 Vue.component('short-field-component', require('./components/shortField.vue').default);
 Vue.component('image-selector-component', require('./components/ImageSelector.vue').default);
 Vue.component('field-alias-component', require('./components/fieldAlias.vue').default);
+Vue.component('field-tags-component', require('./components/fieldTags.vue').default);
+Vue.component('del-link', require('./components/deleteLink.vue').default);
 
 
 /**

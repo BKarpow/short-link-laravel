@@ -65,14 +65,12 @@
         },
         mounted() {
             this.getAll()
-            console.log($)
         },
         methods:{
             getAll(){
                 axios.get('/media/all')
                     .then(resp => {
                         this.imageList = resp.data.data
-                        console.log(resp.data.data)
                     })
             },
             fileLoad(flag){

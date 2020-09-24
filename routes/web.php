@@ -40,6 +40,8 @@ Route::get('/posts/all', 'PostController@show_all')
     ->name('post-all');
 Route::get('/post/{id_alias}', 'PostController@show')
     ->name('post');
+Route::get('/posts/tag/{tag_name}', 'PostController@show_from_tag')
+    ->name('post.show.tag');
 
 
 /* Page */
@@ -53,6 +55,10 @@ Route::get('/feedback', 'FeedbackController@index')
 Route::post('/feedback/send', 'FeedbackController@send')
     ->name('feedback.action');
 /* End Feedback routes */
+
+
+
+
 
 /* Admin panel */
 Route::group([
@@ -124,6 +130,17 @@ Route::group([
             ->name('page-ajax-is-unique');
     ;
 /* End Page admin route */
+
+/* Tags */
+    Route::get('/tags/delete/{tag_id}', 'TagsController@delete_tag')
+        ->name('tags.delete');
+    Route::get('/tags/all', 'TagsController@show_all')
+        ->name('tags.all');
+    Route::get('/tags/ajax/all', 'TagsController@ajax_get_all')
+        ->name('tags.ajax.all');
+    Route::post('/tags/new', 'TagsController@ajax_new')
+        ->name('tags.ajax.new');
+/* END Tags */
 
 });
 

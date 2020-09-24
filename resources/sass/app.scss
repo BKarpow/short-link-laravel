@@ -32,4 +32,20 @@ body{
     }
 }
 
+.title-post-card{
+    width: 100%;
+    position: absolute;
+    top: 8.3rem;
+    color: #fff;
+    padding-left: 1rem;
+    border-bottom: 1px solid #f4f4f4;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,212,255,0.008841036414565795) 100%);
+    a{
+        color: #f4f4f4;
+        font-size: 3rem;
+        text-decoration: none;
+    }
+}
+
 //@import "~@fortawesome/fontawesome-free/css/all.min.css";

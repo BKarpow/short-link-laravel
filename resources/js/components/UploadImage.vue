@@ -60,17 +60,15 @@
             }
         },
         mounted() {
-            if (this.$props.defaultSrc.length){
+            if (this.$props.defaultSrc){
                 this.isLoaded = true
                 this.filePath = this.$props.defaultSrc.replace(this.filePathRoot, '')
-                console.log('Test 21', this.filePath)
             }
         },
         methods:{
             handleFileUpload(){
                 this.file = this.$refs.image.files[0];
                 this.submitFile()
-
             },
             submitFile(){
                 this.showProgress = true
@@ -126,7 +124,7 @@
 
                         })
                         .catch(err => {
-                            console.log('Delete Error', err)
+                            console.error( err)
                         })
             },
 

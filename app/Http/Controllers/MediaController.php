@@ -39,9 +39,14 @@ class MediaController extends Controller
         $this->validate($request, [
             'file' => 'image'
         ]);
-        $path = $request->file('file')
-            ->store('local/media/images/'.$request->user()->id);
-        $this->Media->addNewMedia('Upload', 'Upload file', '/storage/app/'.$path);
+        $file = $request->file('file');
+        $fileName = $file->getClientOriginalName();
+        $fileSize = $file->getSize();
+        $path = $file->store('local/media/images/'.$request->user()->id);
+        $this->Media->addNewMedia($fileName,
+            'Upload file',
+            '/storage/app/'.$path,
+            (int)$fileSize);
         return response()->json(['path' => '/storage/app/'.$path]);
     }
 }

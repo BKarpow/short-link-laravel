@@ -27,7 +27,8 @@ class PostController extends Controller
             $request->input('short_text'),
             $request->input('text'),
             $request->input('main_img'),
-            (int)$request->input('category_id')
+            (int)$request->input('category_id'),
+            $request->input('tags')
         );
         return redirect()->route('create-post')->with('status', 'Стаття додана успішно');
     }
@@ -49,8 +50,9 @@ class PostController extends Controller
         if (!$post){
             abort(404);
         }
+        $tags = $this->Posts->getAllTagsFromPost($id);
         $post->increment('previews');
-        return view('pages.post.post', ['data' => $posts]);
+        return view('pages.post.post', ['data' => $posts, 'tags' => $tags]);
     }
 
     function trigger_public($id){
@@ -84,5 +86,16 @@ class PostController extends Controller
                     ->orderBy('posts.created_at', 'desc')
                     ->paginate(15);
         return view('admin.pages.posts.list', ['data' => $posts]);
+    }
+
+    function show_from_tag($tag_name){
+        $posts_ids =
+        $post = DB::table('posts')
+            ->join('post_tags' , 'post_tags.post_id', '=', 'posts.id')
+            ->join('tags', 'tags.id', '=', 'post_tags.tag_id')
+            ->where('tags.alias', $tag_name)
+            ->select('posts.*', 'tags.alias', 'tags.name')
+            ->paginate(15);
+        return view('pages.post.list', ['data' => $post]);
     }
 }

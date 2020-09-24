@@ -20,7 +20,7 @@
         href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
 
     <!-- Styles -->
-    <link href="{{ asset('/public/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/public/css/app.css?hash='.md5_file($_SERVER['DOCUMENT_ROOT'].'/public/css/app.css')) }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
