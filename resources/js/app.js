@@ -60,6 +60,8 @@ Vue.component('image-selector-component', require('./components/ImageSelector.vu
 Vue.component('field-alias-component', require('./components/fieldAlias.vue').default);
 Vue.component('field-tags-component', require('./components/fieldTags.vue').default);
 Vue.component('del-link', require('./components/deleteLink.vue').default);
+Vue.component('add-comments', require('./components/addComments.vue').default);
+Vue.component('comments', require('./components/comments.vue').default);
 
 
 /**

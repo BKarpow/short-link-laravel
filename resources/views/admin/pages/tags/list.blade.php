@@ -48,7 +48,7 @@
                                     >
                                         <i class="fas fa-trash"></i>
                                     </del-link>
-                                </td>
+                                </td> -c
                             </tr>
                         @endforeach
                         </tbody>

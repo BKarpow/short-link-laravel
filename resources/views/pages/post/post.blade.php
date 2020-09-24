@@ -38,7 +38,15 @@
         </div>
         <!-- /.row -->
         <div class="rom mt-2 justify-content-center align-items-center">
-
+            @if (!auth()->check())
+                <h5 align="center">Щаб лишити коментар потрібно увійти</h5>
+            @endif
+            <comments
+                url-get-comments="{{route('comments.post', ['post_id' => $data->post_id])}}"
+                url-add="{{route('comments.add')}}"
+                post-id="{{$data->post_id}}"
+            >
+            </comments>
         </div>
         <!-- /.rom mt-2 -->
     </div>

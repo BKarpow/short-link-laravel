@@ -57,6 +57,13 @@ Route::post('/feedback/send', 'FeedbackController@send')
 /* End Feedback routes */
 
 
+/* Comments routes */
+Route::post('/comments/add', 'PostCommentController@add_new_comment')
+    ->name('comments.add');
+Route::get('/comments/post/{post_id}', 'PostCommentController@get_comments_from_post')
+    ->name('comments.post');
+/* End Comments routes */
+
 
 
 

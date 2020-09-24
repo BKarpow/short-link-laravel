@@ -44,7 +44,7 @@ class PostController extends Controller
                     ->where([['posts.public', '=', '1'], ['posts.id', '=', $id]])
                     ->leftJoin('category_posts', 'posts.category_id', '=', 'category_posts.id')
                     ->leftJoin('users', 'posts.user_id', '=', 'users.id')
-                     ->select(DB::raw('posts.title as post_title, users.name as user_name'), 'posts.public', 'main_img', 'short_text', 'posts.created_at', 'previews', 'text', 'category_posts.title')
+                     ->select(DB::raw('posts.id as post_id, posts.title as post_title, users.name as user_name'), 'posts.public', 'main_img', 'short_text', 'posts.created_at', 'previews', 'text', 'category_posts.title')
                     ->first();
         $post = Post::where([['public', '=', '1'],['id', '=', $id]])->first();
         if (!$post){
