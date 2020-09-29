@@ -13,6 +13,14 @@
                 <a class="nav-link" href="{{ url('/') }}">На сайт</a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{route('configs')}}" title="Налаштування" class="nav-link">
+                    <i class="fas fa-cogs"></i>
+                </a>
+                <!-- /.nav-link -->
+            </li>
+            <!-- /.nav-item -->
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Категорії

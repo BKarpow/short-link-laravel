@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FeedbackRequest extends FormRequest
+class ConfigsNewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,11 @@ class FeedbackRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:249',
-            'email' => 'required|email',
-            'feedback' => 'required|min:10|max:5000',
-//            'g-recaptcha-response' => 'required|captcha'
+            'namespace' => 'required|max:249',
+            'name' => 'required|max:249',
+            'key' => 'required|max:249',
+            'value' => 'required',
+            'description' => 'required|max:1500',
         ];
     }
 }

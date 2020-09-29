@@ -28,7 +28,7 @@ class PostController extends Controller
             $request->input('text'),
             $request->input('main_img'),
             (int)$request->input('category_id'),
-            $request->input('tags')
+            $request->input('tags', '')
         );
         return redirect()->route('create-post')->with('status', 'Стаття додана успішно');
     }

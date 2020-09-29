@@ -39,7 +39,7 @@
                         <!-- /.btn -->
                     </div>
                     <!-- /.form-group -->
-                    {!! app('captcha')->render(); !!}
+
                 </form>
             </div>
             <!-- /.col-md-10 -->

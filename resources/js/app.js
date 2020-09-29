@@ -62,6 +62,7 @@ Vue.component('field-tags-component', require('./components/fieldTags.vue').defa
 Vue.component('del-link', require('./components/deleteLink.vue').default);
 Vue.component('add-comments', require('./components/addComments.vue').default);
 Vue.component('comments', require('./components/comments.vue').default);
+Vue.component('configs-namespace', require('./components/namespaceField.vue').default);
 
 
 /**

@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', 'SendEmailController@send');
+Route::get('/test', function(){
+    var_dump( conf()->updateConf('test', '4564654564656'));
+    var_dump( conf()->getConf('test'));
+});
 
 Route::get('/', 'HomeController@index')->name('home-main');
 Route::get('/about', 'HomeController@about')->name('about');
@@ -148,6 +151,21 @@ Route::group([
     Route::post('/tags/new', 'TagsController@ajax_new')
         ->name('tags.ajax.new');
 /* END Tags */
+
+    /* Configs */
+    Route::get('/configs/create', 'ConfigsController@page_create')
+        ->name('configs.create');
+    Route::post('/configs/create/action', 'ConfigsController@create_config')
+        ->name('configs.create.action');
+    Route::get('/configs', 'ConfigsController@show_namespaces')
+        ->name('configs');
+    Route::get('/configs/{namespace}', 'ConfigsController@show_config')
+        ->name('configs.namespace');
+    Route::post('/configs/action', 'ConfigsController@set_configs_action')
+        ->name('configs.action');
+    Route::get('/configs/ajax/namespaces' , 'ConfigsController@ajax_get_all_namespace')
+        ->name('configs.ajax.namespaces');
+    /* End Configs */
 
 });
 

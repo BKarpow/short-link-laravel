@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\RoleServiceProvider::class,
+        App\Providers\HelperProvider::class,
 
         /* Invisible reCaptcha from Google */
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
